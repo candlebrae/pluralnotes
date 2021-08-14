@@ -6,4 +6,6 @@ Users can be added, renamed, deleted, and searched through. There is no upper li
 
 Pluralnotes is written in Python 3. It should theoretically run on any computer with the required modules and dependencies installed; however, this utility has not been tested on non-Linux operating systems and may not work.
 
-Can be run from source with <code>python (path to pluralnotesapp.py)</code>. Executable version incoming as soon as I can figure out how to do that.
+Can be run from source with <code>python (path to pluralnotesapp.py)</code>. Make sure all three .py files are in the same directory! 
+
+Executable version incoming as soon as I can figure out how to do that.
