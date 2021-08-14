@@ -5,3 +5,5 @@ Notes can be created with your preferred editor, edited, deleted, viewed, and se
 Users can be added, renamed, deleted, and searched through. There is no upper limit to the number of users you can have other than your disk's storage space. Users each have their own personal directory for personal notes in addition to the shared and archived notes directories.
 
 Pluralnotes is written in Python 3. It should theoretically run on any computer with the required modules and dependencies installed; however, this utility has not been tested on non-Linux operating systems and may not work.
+
+Can be run from source with <code>python pluralnotesapp.py</code>. Executable version incoming as soon as I can figure out how to do that.
