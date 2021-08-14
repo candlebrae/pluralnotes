@@ -168,7 +168,8 @@ def paginateDir(dirName):
 				userInput = int(input(" Enter the number of the note to edit: "))
 				if 0 <= userInput < len(dirContents):
 					editFile = dirContents[userInput]
-					os.system(editor + " " + editFile)
+					editCommand = str(editor + " '" + editFile + "'")
+					os.system(editCommand)
 					feedback = "Changes saved."
 					clear()
 				else:
@@ -259,7 +260,8 @@ def noteHandler(workingDir):
 				newFile = newFile + ".txt"
 				clear()
 				sleep(0.05) # Filename improperly created if sleep is not added
-				os.system(editor + " " + newFile)
+				editCommand = str(editor + " '" + newFile + "'")
+				os.system(editCommand)
 				# newFile = newFile  + "-" + username + "-" + todayDate + ".txt"
 				# Sign note if requested by appending it onto the end of the file contents.
 				print()
