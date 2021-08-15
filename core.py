@@ -5,9 +5,15 @@ from datetime import date
 from time import sleep
 import re
 from shutil import move
+import platform
 
 # Local imports
 import login
+
+if platform.system() == "Windows":
+    envHome = os.getenv('APPDATA')
+else:
+    envHome = os.environ['HOME']
 
 # Forgive me father, for this code is messy. At least it works.
 
@@ -31,7 +37,7 @@ def dirChanger(dirName):
 def paginateDir(dirName):
 	feedback = ""
 	username = login.username
-	settingsFile = os.environ['HOME'] + '/.pluralnotes' + "/" + username + "/data/settings.txt"
+	settingsFile = envHome + '/.pluralnotes' + "/" + username + "/data/settings.txt"
 	settings = open(settingsFile, 'r').readlines()
 	editor = str(settings[0]).strip()
 	fileCount = int(str(settings[1]).strip())
@@ -217,7 +223,7 @@ def noteHandler(workingDir):
 	username = login.username
 	sharedSelection = "0"
 	# Set settings
-	settingsFile = os.environ['HOME'] + '/.pluralnotes' + "/" + username + "/data/settings.txt"
+	settingsFile = envHome + '/.pluralnotes' + "/" + username + "/data/settings.txt"
 	settings = open(settingsFile, 'r').readlines()
 	editor = settings[0].strip()
 	fileCount = settings[1].strip()
@@ -248,7 +254,7 @@ def noteHandler(workingDir):
 				clear()
 				feedback = "Please enter a note name."
 			else:
-				sharedDir = os.environ['HOME'] + '/.pluralnotes' + '/sharednotes'
+				sharedDir = envHome + '/.pluralnotes' + '/sharednotes'
 				# Use settings to add date and/or username onto file
 				if showDate.strip() == "True" or workingDir == sharedDir:
 					newdatefile = newFile + "-" + str(todayDate)

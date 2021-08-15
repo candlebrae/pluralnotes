@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 import os
 import sys
+import platform
 
 # Local imports
 import core
 
-notesDir = os.environ['HOME'] + '/.pluralnotes' # Used to define the main notes directory and/or work with it.
+if platform.system() == "Windows":
+    envHome = os.getenv('APPDATA')
+else:
+    envHome = os.environ['HOME']
+    
+notesDir = envHome + '/.pluralnotes' # Used to define the main notes directory and/or work with it.
 
 # Login sequence; tries to account for upper/lowercase and exits if the user requests it, else loops prompt until a valid login is entered. Allows users to create nonexistent username directories as long as they don't violate these restrictions, or log into an existing one.
 # TODO: Check if a username including a backslash is a problem at all.

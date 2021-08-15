@@ -5,6 +5,7 @@ import colorama
 import shutil
 import re
 from time import sleep
+import platform
 # Local imports
 import core
 import login
@@ -15,7 +16,16 @@ colorama.init()
 # TODO: Check on this: "On some platforms, including FreeBSD and Mac OS X, setting environ may cause memory leaks. Refer to the system documentation for putenv()." See line 12 for why
 # os.remove can remove files. Specify path.
 
-notesDir = os.environ['HOME'] + '/.pluralnotes' # Used to define the main notes directory and/or work with it.
+
+if platform.system() == "Windows":
+    envHome = os.getenv('APPDATA')
+else:
+    envHome = os.environ['HOME']
+    
+
+notesDir = envHome + '/.pluralnotes' # Used to define the main notes directory and/or work with it.
+
+
 sharedDir = notesDir + '/sharednotes' # Location of shared directory
 archiveDir = notesDir + '/archivednotes' # Location of archive directory (deleted users' notes)
 
@@ -37,7 +47,7 @@ userDir = notesDir + "/" + username
 # TODO: Figure out password authentication and directory encryption so inter-user privacy is possible. This is meant to be a multiuser notekeeping utility on one shared computer account, so passwords are kind of important for that. Also MAKE SURE that the passwords are stored encrypted, and encrypt the entered password with the same hash to compare. People reuse passwords a lot and it's a security hazard to store them in plaintext. Make sure the password is not displayed as it's typed, too.
 
 # Set settings from user file now that they're logged in.
-settingsFile = os.environ['HOME'] + '/.pluralnotes' + "/" + login.username + "/data/settings.txt"
+settingsFile = envHome + '/.pluralnotes' + "/" + login.username + "/data/settings.txt"
 settings = open(settingsFile, 'r').readlines()
 editor = settings[0]
 fileCount = int(settings[1])
@@ -428,15 +438,15 @@ while 1:
 		core.clear()
 		# Copy detection- if pluralnotes.zip already exists, check if pluralnotes1.zip exists, then pluralnotes2.zip, and so on until a free name is found. Then make that file and chuck it in the home directory for the user.
 		copyNumber = 1
-		if os.path.exists(os.environ['HOME'] + "/pluralnotes.zip") == True or os.path.exists(os.environ['HOME'] + "\pluralnotes.zip") == True:
-			while os.path.exists(os.environ['HOME'] + "/pluralnotes" + str(copyNumber) + ".zip") == True or os.path.exists(os.environ['HOME'] + "/pluralnotes" + str(copyNumber) + ".zip") == True:
+		if os.path.exists(envHome + "/pluralnotes.zip") == True or os.path.exists(envHome + "\pluralnotes.zip") == True:
+			while os.path.exists(envHome + "/pluralnotes" + str(copyNumber) + ".zip") == True or os.path.exists(os.environ['HOME'] + "/pluralnotes" + str(copyNumber) + ".zip") == True:
 				copyNumber = copyNumber + 1
 			zipName = "pluralnotes" + str(copyNumber)
 		else:
 			zipName = "pluralnotes"
-		os.chdir(os.environ['HOME'])
+		os.chdir(envHome)
 		shutil.make_archive(zipName, 'zip', root_dir=notesDir)
-		#shutil.move(zipName + ".zip", os.environ['HOME'])
+		#shutil.move(zipName + ".zip", envHome)
 		os.chdir(notesDir)
 		feedback = zipName + ".zip created; it can be found in your home directory."
 
