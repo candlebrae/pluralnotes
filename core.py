@@ -267,8 +267,8 @@ def noteHandler(workingDir):
 				clear()
 				sleep(0.05) # Filename improperly created if sleep is not added
 				editCommand = str(editor + " '" + newFile + "'")
-				signName = open(newFile, "x")
 				signName.close
+				signName = open(newFile, "w")
 				os.system(editCommand)
 				# newFile = newFile  + "-" + username + "-" + todayDate + ".txt"
 				# Sign note if requested by appending it onto the end of the file contents.
