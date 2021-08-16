@@ -10,12 +10,12 @@ import platform
 # Local imports
 import login
 
-if platform.system() == "Windows":
-    envHome = os.getenv('APPDATA')
-else:
-    envHome = os.environ['HOME']
-
 # Forgive me father, for this code is messy. At least it works.
+
+if platform.system() == "Windows":
+	envHome = os.getenv('APPDATA')
+else:
+	envHome = os.environ['HOME']
 
 # Set editor var via env, or default to nano on Linux and Mac, and Notepad on Windows if none is set.
 if os.name == "nt":
@@ -267,6 +267,8 @@ def noteHandler(workingDir):
 				clear()
 				sleep(0.05) # Filename improperly created if sleep is not added
 				editCommand = str(editor + " '" + newFile + "'")
+				signName = open(newFile, "x")
+				signName.close
 				os.system(editCommand)
 				# newFile = newFile  + "-" + username + "-" + todayDate + ".txt"
 				# Sign note if requested by appending it onto the end of the file contents.
@@ -279,6 +281,7 @@ def noteHandler(workingDir):
 					clear()
 					feedback = "Note signed!"
 				else:
+					newFile.close
 					clear()
 					feedback = "Note saved!"
 		elif sharedSelection == "2" or sharedSelection == "v" or sharedSelection == "e":
