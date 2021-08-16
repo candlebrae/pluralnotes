@@ -267,8 +267,8 @@ def noteHandler(workingDir):
 				clear()
 				sleep(0.05) # Filename improperly created if sleep is not added
 				editCommand = str(editor + " '" + newFile + "'")
-				signName.close
 				signName = open(newFile, "w")
+				signName.close()
 				os.system(editCommand)
 				# newFile = newFile  + "-" + username + "-" + todayDate + ".txt"
 				# Sign note if requested by appending it onto the end of the file contents.
@@ -277,11 +277,11 @@ def noteHandler(workingDir):
 				if signNameCheck == "y" or signNameCheck == "yes":
 					signName = open(newFile, "a")
 					signName.write("\n -" + username) # New line helps keep the signature distinct
-					signName.close
+					signName.close()
 					clear()
 					feedback = "Note signed!"
 				else:
-					newFile.close
+					newFile.close()
 					clear()
 					feedback = "Note saved!"
 		elif sharedSelection == "2" or sharedSelection == "v" or sharedSelection == "e":
