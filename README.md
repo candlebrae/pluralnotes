@@ -6,4 +6,6 @@ Users can be added, renamed, deleted, and searched through. There is no upper li
 
 Pluralnotes is written in Python 3. It works on Linux and Windows for certain, and should theoretically run on MacOS as well. You can download the latest executables <a href="https://github.com/candlebrae/pluralnotes/releases">here</a>.
 
+If you're an Arch Linux or Arch-based Linux user, you can also get <a href="https://aur.archlinux.org/packages/pluralnotes-bin/">PluralNotes on the AUR.</a>
+
 If you'd like, it can be run from source with <code>python (path to pluralnotesapp.py)</code>. Make sure all three .py files are in the same directory! It requires the colorama module for adding color on the command line; if you don't have the colorama module installed, you can install it with pip via <code>pip install colorama</code>. All other modules should be contained within Python's default installation.
