@@ -10,7 +10,7 @@ if platform.system() == "Windows":
     envHome = os.getenv('APPDATA')
 else:
     envHome = os.environ['HOME']
-    
+
 notesDir = envHome + '/.pluralnotes' # Used to define the main notes directory and/or work with it.
 
 # Login sequence; tries to account for upper/lowercase and exits if the user requests it, else loops prompt until a valid login is entered. Allows users to create nonexistent username directories as long as they don't violate these restrictions, or log into an existing one.
@@ -54,9 +54,16 @@ def login():
 
 		# Log in valid existing users and proceed to the actual program
 		# TODO: Add password authentication and decryption of logged-in user.
-		elif os.path.isdir(notesDir + "/" + username) == True:
+		elif os.path.isdir(notesDir + "/" + username) == True and username != "":
 			userDir = notesDir + "/" + username
-			if os.path.isfile(userDir + "/data/settings.txt") == False:
+			if username.isspace() == True or " " in username or "\n" in username or "\t" in username:
+				core.clear()
+				print(" Usernames cannot contain spaces, tabs, or new lines. Please enter a valid username.")
+			elif username == False or username == "":
+				core.clear()
+				print(" Please enter a valid username.") # If these aren't here, it gets ugly real quick. I don't know why, but apparently it considers an empty string user to exist.
+
+			elif os.path.isfile(userDir + "/data/settings.txt") == False and userDir != "":
 				if os.name == "nt":
 					defaultEditor = os.environ.get('EDITOR') if os.environ.get('EDITOR') else 'notepad'
 				else:
