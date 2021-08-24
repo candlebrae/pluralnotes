@@ -23,9 +23,9 @@ def login():
 		# If user does not yet exist:
 		# Deal with whitespaces and empty strings
 		if os.path.isdir(notesDir + "/" + username) == False:
-			if username.isspace() == True or " " in username or "\n" in username or "\t" in username:
+			if username.isspace() == True or " " in username or "\n" in username or "\t" in username or "/" in username or "\\" in username:
 				core.clear()
-				print(" Usernames cannot contain spaces, tabs, or new lines. Please enter a valid username.")
+				print(" Usernames cannot contain spaces, tabs, slashes, or new lines. Please enter a valid username.")
 			elif username == False or username == "":
 				core.clear()
 				print(" Please enter a valid username.")
